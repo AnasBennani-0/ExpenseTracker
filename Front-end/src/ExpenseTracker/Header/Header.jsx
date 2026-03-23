@@ -18,22 +18,22 @@ export default function Header() {
     const [user, setUser] = useState(null);
     const [isScrolled, setIsScrolled] = useState(false);
     
-    // État pour gérer l'icône du mode sombre
     const [isDarkMode, setIsDarkMode] = useState(false);
 
-    // Effet pour le Glassmorphism au scroll
+   
     useEffect(() => {
         const handleScroll = () => setIsScrolled(window.scrollY > 10);
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Vérifier l'utilisateur connecté
+   
     useEffect(() => {
         const checkUser = async () => {
             try {
-                // J'ai ajouté withCredentials au cas où pour ta session Laravel
-                const res = await axios.get("http://localhost:8000/user-data", { withCredentials: true });
+                const API_URL = process.env.REACT_APP_API_URL;
+                
+                const res = await axios.get(`${API_URL}/user-data`, { withCredentials: true });
                 setUser(res.data);
             } catch (err) {
                 setUser(null);
@@ -42,14 +42,13 @@ export default function Header() {
         checkUser();
     }, []);
 
-    // Vérifier si le mode sombre est déjà actif au chargement
+  
     useEffect(() => {
         if (document.documentElement.classList.contains('dark')) {
             setIsDarkMode(true);
         }
     }, []);
 
-    // Toggle Mode Sombre avec animation
     const toggleDarkMode = () => {
         document.documentElement.classList.toggle('dark');
         setIsDarkMode(!isDarkMode);
@@ -58,7 +57,8 @@ export default function Header() {
     const handlelogout = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:8000/logout', {}, { withCredentials: true });
+            const API_URL = process.env.REACT_APP_API_URL;
+            await axios.post(`${API_URL}/logout`, {}, { withCredentials: true });
             setUser(null);
             nav("/login");
         } catch (error) {

@@ -20,7 +20,7 @@ export default function Filter({ setCurrentPage }) {
     note: ""
   });
 
-  // Le useEffect rassemble TOUS les filtres intelligents
+
   useEffect(() => {
     const params = {};
     
@@ -49,7 +49,6 @@ export default function Filter({ setCurrentPage }) {
   return (
     <div className="flex flex-col gap-5 p-5 md:p-6 bg-card/40 backdrop-blur-xl border border-border/60 rounded-3xl shadow-lg mb-8 transition-all">
       
-      {/* EN-TÊTE DU FILTRE */}
       <div className="flex items-center gap-3 border-b border-border/40 pb-4">
         <div className="p-2 bg-primary/10 rounded-xl ring-1 ring-primary/20">
           <FilterIcon className="w-4 h-4 text-primary" />
@@ -59,10 +58,10 @@ export default function Filter({ setCurrentPage }) {
         </h2>
       </div>
 
-      {/* CONTENEUR DES CHAMPS */}
+     
       <div className="flex flex-wrap items-end gap-5">
         
-        {/* PAR CATÉGORIE */}
+       
         <div className="space-y-2 flex-1 min-w-50">
           <Label className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider flex items-center gap-1.5">
             <Layers className="w-3.5 h-3.5" /> Par Catégorie
@@ -123,7 +122,6 @@ export default function Filter({ setCurrentPage }) {
           </Select>
         </div>
 
-        {/* PAR PÉRIODE */}
         <div className="space-y-2 flex-1 min-w-40">
           <Label className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider flex items-center gap-1.5">
             <CalendarDays className="w-3.5 h-3.5" /> Période

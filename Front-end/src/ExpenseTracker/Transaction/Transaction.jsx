@@ -31,9 +31,9 @@ export default function Transaction() {
     dispatch(getCat());
   }, [dispatch, currentPage]);
 
-  // Fonction pour exporter en CSV
+ 
   const exportToCSV = () => {
-    // On utilise bien "db" ici, car c'est le nom de ta variable Redux
+
     if (!db || db.length === 0) {
       alert("Aucune transaction à exporter.");
       return;
@@ -103,11 +103,8 @@ export default function Transaction() {
           </div>
         </div>
       </div>
-
-      {/* Barre de Filtre */}
       <Filter setCurrentPage={setCurrentPage} />
 
-      {/* Tableau des Transactions */}
       <div className="bg-card/50 backdrop-blur-xl border border-border/60 rounded-3xl shadow-xl overflow-hidden transition-all duration-300">
         <div className="overflow-x-auto">
           <Table>
@@ -219,7 +216,6 @@ export default function Transaction() {
           </Table>
         </div>
 
-        {/* Pagination */}
         <div className="flex items-center justify-between px-6 py-4 border-t border-border/40 bg-muted/10">
           <p className="text-sm text-muted-foreground hidden sm:block font-medium">
             Total : <span className="font-bold text-foreground">{meta?.total || 0}</span> transactions

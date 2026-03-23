@@ -13,14 +13,14 @@ import {
 export default function Dash() {
   const dispatch = useDispatch();
   
-  // On récupère le super-objet `stats` généré par le backend Laravel
+
   const stats = useSelector((st) => st.transaction.stats);
 
   useEffect(() => {
     dispatch(fetchDashboardStats());
   }, [dispatch]);
 
-  // 1. CONFIGURATION PIE CHART (Dépenses par catégorie)
+
   const chartDataWithColors = useMemo(() => {
     return stats?.chartData?.map((item, index) => ({
       category: item.category,
@@ -39,7 +39,7 @@ export default function Dash() {
     }, { amount: { label: "Montant (DH)" } }) || {};
   }, [stats]);
 
-  // 2. CONFIGURATION BAR CHART ET LINE CHART (Données pré-calculées par Laravel)
+  
   const barChartData = stats?.barChartData || [];
   const chartDataLine = stats?.chartDataLine || [];
 
@@ -54,7 +54,7 @@ export default function Dash() {
   return (
     <div className="p-6 md:p-8 max-w-7xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
       
-      {/* EN-TÊTE DU DASHBOARD */}
+     
       <div className="flex items-center gap-3 mb-8">
         <div className="p-3 bg-primary/10 rounded-2xl ring-1 ring-primary/20">
           <Activity className="w-8 h-8 text-primary" />
@@ -69,10 +69,10 @@ export default function Dash() {
         </div>
       </div>
 
-      {/* CARTES DE STATISTIQUES (BENTO STYLE) */}
+   
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         
-        {/* REVENUS */}
+    
         <div className="group relative bg-card p-6 rounded-3xl border border-border shadow-sm hover:shadow-lg hover:shadow-green-500/5 transition-all duration-300 hover:-translate-y-1 overflow-hidden">
           <div className="absolute top-0 right-0 w-32 h-32 bg-green-500/5 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-110"></div>
           <div className="relative flex flex-col gap-4">
@@ -126,10 +126,10 @@ export default function Dash() {
         </div>
       </div>
 
-      {/* GRAPHIQUES - LIGNE 1 */}
+     
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
         
-        {/* PIE CHART */}
+       
         <Card className="flex flex-col bg-card/50 backdrop-blur-xl border-border/60 shadow-lg rounded-3xl overflow-hidden">
           <CardHeader className="items-center pb-2 pt-8 border-b border-border/40 bg-muted/20">
             <CardTitle className="text-xl font-extrabold text-foreground">Répartition des Dépenses</CardTitle>
@@ -167,7 +167,7 @@ export default function Dash() {
           </CardContent>
         </Card>
 
-        {/* BAR CHART */}
+  
         <Card className="flex flex-col bg-card/50 backdrop-blur-xl border-border/60 shadow-lg rounded-3xl overflow-hidden">
           <CardHeader className="pb-4 pt-8 border-b border-border/40 bg-muted/20 flex flex-row items-center justify-between">
             <div>
@@ -191,9 +191,9 @@ export default function Dash() {
         </Card>
       </div>
 
-      {/* GRAPHIQUES - LIGNE 2 (Full Width) */}
+      
       <div className="grid grid-cols-1 mt-6">
-        {/* AREA CHART */}
+       
         <Card className="flex flex-col bg-card/50 backdrop-blur-xl border-border/60 shadow-lg rounded-3xl overflow-hidden">
           <CardHeader className="pb-4 pt-8 border-b border-border/40 bg-muted/20 flex flex-row items-center justify-between">
              <div>

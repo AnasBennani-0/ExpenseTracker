@@ -37,7 +37,7 @@ export default function DialogTran({ modif, clearModif }) {
   const txtnote = useRef(null);
   const categoryRef = useRef("");
   
-  // 👉 CORRECTIF 1 : On définit "expense" par défaut au cas où l'utilisateur ne touche pas au select
+
   const typeRef = useRef("expense"); 
   
   const closeBtnRef = useRef(null);
@@ -67,7 +67,7 @@ export default function DialogTran({ modif, clearModif }) {
       date: datetxt.current.value,
       category_id: parseInt(categoryRef.current),
       
-      // 👉 CORRECTIF 2 : On utilise la vraie valeur sélectionnée
+     
       type: typeRef.current, 
       
       note: txtnote.current.value,

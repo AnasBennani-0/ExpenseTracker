@@ -20,7 +20,8 @@ export default function Register() {
         setErrors({}); 
         setIsLoading(true);
         try {
-            await axios.post('http://localhost:8000/register', {
+            const API_URL = process.env.REACT_APP_API_URL;
+            await axios.post(`${API_URL}/register`, {
                 name: nameRef.current.value,
                 email: emailRef.current.value,
                 password: passwordRef.current.value,

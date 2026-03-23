@@ -12,7 +12,7 @@ import { Button } from "../components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../components/ui/card"
 import { Input } from "../components/ui/input"
 import { Label } from "../components/ui/label"
-import { useNavigate } from 'react-router-dom'; // On enlève Link, on met useNavigate
+import { useNavigate } from 'react-router-dom'; 
 
 const formSchema = z.object({
   name: z.string().min(3, "Le nom doit contenir au moins 3 caractères."),
@@ -32,11 +32,11 @@ export default function Profile() {
     },
   });
 
-  // RÉCUPÉRATION DES DONNÉES (S'exécute une seule fois)
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/user-data", { withCredentials: true });
+        const API_URL = process.env.REACT_APP_API_URL;
+        const res = await axios.get(`${API_URL}/user-data`, { withCredentials: true });
         form.reset({
           name: res.data.name,
           email: res.data.email,
@@ -56,8 +56,8 @@ export default function Profile() {
     try {
       const payload = { ...data };
       if (!payload.password) delete payload.password;
-
-      await axios.put("http://localhost:8000/user/update", payload, { withCredentials: true });
+      const API_URL = process.env.REACT_APP_API_URL;
+      await axios.put(`${API_URL}/user/update`, payload, { withCredentials: true });
       
       toast.success("Profil mis à jour !", {
         description: "Vos modifications ont été enregistrées avec succès.",

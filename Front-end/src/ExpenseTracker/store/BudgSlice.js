@@ -1,7 +1,7 @@
 import { createAsyncThunk,createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const API_URL ="http://localhost:8000/budgets";
+const API_URL = process.env.REACT_APP_API_URL;
 
 export const fetchBudgets =createAsyncThunk("budgets/fetch",async () => { 
        const res = await axios.get(API_URL);

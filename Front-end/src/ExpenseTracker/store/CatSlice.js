@@ -7,7 +7,7 @@ const intitState={
     error:null
 }
 
-const API_URL = "http://localhost:8000/categorie";
+const API_URL = process.env.REACT_APP_API_URL;
 
 export const getCat=createAsyncThunk("/categorie/getCat",async()=>{
     const response= await axios.get(API_URL);

@@ -2,12 +2,12 @@ import React, { useEffect, useRef, useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { PiggyBank, Target, Calendar, Trash2, Loader2, LayoutGrid } from "lucide-react";
 
-// --- IMPORTS SLICES ---
+
 import { addBudgets, fetchBudgets, deleteBudgets } from "../store/BudgSlice";
 import { getCat } from "../store/CatSlice";
-// 🎉 Plus besoin d'importer fetchTransactions ici, Laravel fait le calcul !
 
-// --- IMPORTS UI ---
+
+
 import { Button } from "../../components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../../components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../components/ui/select";
@@ -29,7 +29,6 @@ function Budget() {
   useEffect(() => {
     dispatch(getCat()); 
     dispatch(fetchBudgets());
-    // 🎉 Plus besoin de dispatch(fetchTransactions()), ça allège la charge réseau !
   }, [dispatch]);
 
   const ajouteHandler = async () => {
@@ -53,10 +52,8 @@ function Budget() {
 
   const budgetStats = useMemo(() => {
     return dbBudgets.map((budget) => {
-      // On récupère le nom de la catégorie (Laravel l'envoie via with('category'), mais on garde la sécurité dbC au cas où)
       const categoryObj = dbC.find(c => String(c.id) === String(budget.category_id));
       
-      // 👉 LA MAGIE EST ICI : On récupère directement la somme renvoyée par Laravel
       const spent = parseFloat(budget.spent) || 0;
       
       const limit = parseFloat(budget.amount) || 1;
@@ -69,12 +66,12 @@ function Budget() {
         isOver: spent > limit
       };
     });
-  }, [dbBudgets, dbC]); // dbTransactions a disparu des dépendances
+  }, [dbBudgets, dbC]); 
 
   return (
     <div className="p-6 md:p-8 max-w-7xl mx-auto space-y-8 animate-in fade-in duration-500">
       
-      {/* En-tête */}
+      
       <div className="flex items-center gap-4">
         <div className="p-3 bg-primary/10 rounded-2xl ring-1 ring-primary/20">
           <PiggyBank className="w-8 h-8 text-primary" />

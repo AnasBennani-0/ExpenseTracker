@@ -18,8 +18,9 @@ export default function Login() {
         setIsLoading(true);
         setError(null);
         try {
-            await axios.get('http://localhost:8000/sanctum/csrf-cookie');
-            await axios.post('http://localhost:8000/login', {
+            const API_URL = process.env.REACT_APP_API_URL;
+            await axios.get(`${API_URL}/sanctum/csrf-cookie`);
+            await axios.post(`${API_URL}/login`, {
                 email: emailRef.current.value,
                 password: passwordRef.current.value
             });
@@ -36,16 +37,16 @@ export default function Login() {
     };
 
     return (
-        // Remplacement de bg-gray-50 par bg-background
+       
         <div className="flex min-h-screen items-center justify-center bg-background p-4">
-            {/* Remplacement de bg-white par bg-card et border-gray-100 par border-border */}
+            
             <div className="w-full max-w-md space-y-8 bg-card p-8 rounded-2xl shadow-xl border border-border">
                 
                 <div className="text-center space-y-2">
                     <div className="mx-auto bg-primary text-primary-foreground w-12 h-12 rounded-xl flex items-center justify-center mb-4 shadow-lg rotate-3 hover:rotate-0 transition-transform duration-300">
                         <Wallet className="w-6 h-6" />
                     </div>
-                    {/* Remplacement de text-gray-900 par text-card-foreground */}
+                   
                     <h1 className="text-3xl font-extrabold tracking-tight text-card-foreground">Bon retour !</h1>
                     <p className="text-muted-foreground text-sm">Entrez vos identifiants pour accéder à votre compte.</p>
                 </div>
