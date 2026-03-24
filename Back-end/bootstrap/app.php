@@ -12,23 +12,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        // Active Sanctum pour les applications SPA comme React
-        $middleware->statefulApi();
-
-        // Autorise la route /login à recevoir des requêtes POST sans jeton CSRF
-        $middleware->validateCsrfTokens(except: [
-            '/login',
-            '/budget',
-            '/register',
-            'user/update',
-            '/logout',
-            '/transactions',
-            '/transactions/*', 
-            '/budgets',
-            '/budgets/*',
-            '/categorie',
-            '/categorie/*',
-        ]);
+        // AUCUN statefulApi() ici. 
+        // AUCUN validateCsrfTokens ici.
+        // Ton API est maintenant 100% gérée par des Tokens purs.
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
